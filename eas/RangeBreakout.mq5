@@ -32,6 +32,7 @@ input double InpTakeProfit  = 0.0;      // Take profit (poin, 0 = nonaktif)
 input int    InpMaxSpread   = 50;       // Batas maksimum spread (poin)
 input int    InpMagicNumber = 1002;     // Nomor ajaib EA
 input int    InpSlippage    = 30;       // Slippage (poin)
+input bool   InpAllowReal   = false;    // IZINKAN berjalan di akun REAL (default: TIDAK)
 
 //+------------------------------------------------------------------+
 //| Variabel global                                                   |
@@ -47,6 +48,9 @@ int    currentDay  = -1;
 //+------------------------------------------------------------------+
 int OnInit()
   {
+   if(!IsAccountAllowed())
+      return(INIT_FAILED);
+
    if(InpLotSize <= 0)
      {
       Print("Ukuran lot harus lebih besar dari 0.");
@@ -202,6 +206,20 @@ void ApplySLTP()
 
    if(!trade.PositionModify(ticket, sl, tp))
       Print("Gagal set SL/TP, error: ", GetLastError());
+  }
+
+//+------------------------------------------------------------------+
+//| Pengaman: blokir EA pada akun real                               |
+//+------------------------------------------------------------------+
+bool IsAccountAllowed()
+  {
+   if(AccountInfoInteger(ACCOUNT_TRADE_MODE) == ACCOUNT_TRADE_MODE_REAL && !InpAllowReal)
+     {
+      Print("PENGAMAN: Akun ini adalah akun REAL. EA tidak berjalan untuk melindungi dana.");
+      Print("Ubah InpAllowReal menjadi true hanya jika Anda memahami risikonya.");
+      return(false);
+     }
+   return(true);
   }
 
 //+------------------------------------------------------------------+
