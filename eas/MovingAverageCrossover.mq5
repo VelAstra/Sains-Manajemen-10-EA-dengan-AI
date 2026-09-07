@@ -92,18 +92,22 @@ void OnTick()
    if(!IsSpreadOK())
       return;
 
-   double fastPrev = 0.0, fastCurr = 0.0;
-   double slowPrev = 0.0, slowCurr = 0.0;
+   double fastVal[], slowVal[];
+   ArraySetAsSeries(fastVal, true);
+   ArraySetAsSeries(slowVal, true);
 
-   if(CopyBuffer(hFastMA, 0, 1, 2, fastCurr) < 2)
+   if(CopyBuffer(hFastMA, 0, 0, 2, fastVal) < 2)
       return;
-   if(CopyBuffer(hSlowMA, 0, 1, 2, slowCurr) < 2)
+   if(CopyBuffer(hSlowMA, 0, 0, 2, slowVal) < 2)
       return;
-   fastPrev = fastCurr[1];
-   slowPrev = slowCurr[1];
 
-   bool crossUp   = (fastPrev <= slowPrev) && (fastCurr[0] > slowCurr[0]);
-   bool crossDown = (fastPrev >= slowPrev) && (fastCurr[0] < slowCurr[0]);
+   double fastPrev = fastVal[1];
+   double fastCurr = fastVal[0];
+   double slowPrev = slowVal[1];
+   double slowCurr = slowVal[0];
+
+   bool crossUp   = (fastPrev <= slowPrev) && (fastCurr > slowCurr);
+   bool crossDown = (fastPrev >= slowPrev) && (fastCurr < slowCurr);
 
    if(CountPositions() > 0)
       return;

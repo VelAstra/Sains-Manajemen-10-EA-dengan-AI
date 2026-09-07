@@ -76,7 +76,7 @@ void OnTick()
    MqlDateTime dt;
    TimeToStruct(now, dt);
 
-   int dayOfYear = dt.year * 1000 + dt.yday;
+   int dayOfYear = dt.year * 1000 + dt.day_of_year;
    int rangeStart = InpStartHour * 60 + InpStartMinute;
    int rangeEnd   = InpEndHour   * 60 + InpEndMinute;
    int currentMin = dt.hour * 60 + dt.min;
