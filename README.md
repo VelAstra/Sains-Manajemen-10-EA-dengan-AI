@@ -1,6 +1,10 @@
 # Sains-Manajemen-10-EA-dengan-AI
 Mata Kuliah: Sains Manajemen
+
+
 Nama: Rayhan Haldi Hermawan NIM: 24/545406/PA/23176
+
+
 Project Sains Manajemen 261 - Membuat 10 Expert Advisor (EA) untuk MetaTrader 5 dengan bantuan AI.
 
 ## Cara Kerja
