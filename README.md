@@ -19,6 +19,15 @@ Project Sains Manajemen 261 - Membuat 10 Expert Advisor (EA) untuk MetaTrader 5 
 | No | EA | Strategi | Referensi | Status |
 |----|----|----------|-----------|--------|
 | 1 | `eas/MovingAverageCrossover.mq5` | Moving Average Crossover | [Rene Balke](https://www.youtube.com/watch?v=T78Q7K3c11s) | In Progress |
+| 2 | `eas/RangeBreakout.mq5` | Range / Opening Range Breakout | [Rene Balke](https://www.youtube.com/@ReneBalke) | In Progress |
+| 3 | TBD | Menyusul | - | Planned |
+| 4 | TBD | Menyusul | - | Planned |
+| 5 | TBD | Menyusul | - | Planned |
+| 6 | TBD | Menyusul | - | Planned |
+| 7 | TBD | Menyusul | - | Planned |
+| 8 | TBD | Menyusul | - | Planned |
+| 9 | TBD | Menyusul | - | Planned |
+| 10 | TBD | Menyusul | - | Planned |
 
 ## Referensi Channel
 

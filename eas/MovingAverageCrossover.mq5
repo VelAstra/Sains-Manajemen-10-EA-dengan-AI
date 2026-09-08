@@ -39,7 +39,6 @@ input bool             InpAllowReal     = false;      // IZINKAN berjalan di aku
 //+------------------------------------------------------------------+
 int      hFastMA = INVALID_HANDLE;
 int      hSlowMA = INVALID_HANDLE;
-int      prevBarTime = 0;
 datetime lastBarTime = 0;
 
 //+------------------------------------------------------------------+
@@ -65,12 +64,10 @@ int OnInit()
       return(INIT_FAILED);
      }
 
-   trade.SetExpertMagicNumber(InpMagicNumber);
-   trade.SetDeviationInPoints(InpSlippage);
+    trade.SetExpertMagicNumber(InpMagicNumber);
+    trade.SetDeviationInPoints(InpSlippage);
 
-   prevBarTime = Bars(_Symbol, _Period);
-
-   Print("MovingAverageCrossover EA berhasil diinisialisasi.");
+    Print("MovingAverageCrossover EA berhasil diinisialisasi.");
    return(INIT_SUCCEEDED);
   }
 
@@ -152,26 +149,9 @@ bool IsSpreadOK()
 //+------------------------------------------------------------------+
 bool OpenPosition(ENUM_ORDER_TYPE type)
   {
-   int sl = 0, tp = 0;
-
-   if(InpStopLoss > 0)
-     {
-      if(type == ORDER_TYPE_BUY)
-         sl = (int)InpStopLoss;
-      else
-         sl = -(int)InpStopLoss;
-     }
-
-   if(InpTakeProfit > 0)
-     {
-      if(type == ORDER_TYPE_BUY)
-         tp = (int)InpTakeProfit;
-      else
-         tp = -(int)InpTakeProfit;
-     }
-
-   double price = (type == ORDER_TYPE_BUY) ? SymbolInfoDouble(_Symbol, SYMBOL_ASK)
-                                           : SymbolInfoDouble(_Symbol, SYMBOL_BID);
+//--- SL/TP diterapkan setelah posisi terbuka via ApplySLTP()
+    double price = (type == ORDER_TYPE_BUY) ? SymbolInfoDouble(_Symbol, SYMBOL_ASK)
+                                            : SymbolInfoDouble(_Symbol, SYMBOL_BID);
 
    bool result = false;
 
