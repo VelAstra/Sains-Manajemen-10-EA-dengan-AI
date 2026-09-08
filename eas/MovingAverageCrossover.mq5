@@ -110,13 +110,25 @@ void OnTick()
    bool crossUp   = (fastPrev <= slowPrev) && (fastCurr > slowCurr);
    bool crossDown = (fastPrev >= slowPrev) && (fastCurr < slowCurr);
 
-   if(CountPositions() > 0)
+   if(!crossUp && !crossDown)
       return;
 
+   ENUM_POSITION_TYPE existing = GetOpenPositionType();
+
    if(crossUp)
-      OpenPosition(ORDER_TYPE_BUY);
+     {
+      if(existing == POSITION_TYPE_SELL)
+         ClosePositions();
+      if(CountPositions() == 0)
+         OpenPosition(ORDER_TYPE_BUY);
+     }
    else if(crossDown)
-      OpenPosition(ORDER_TYPE_SELL);
+     {
+      if(existing == POSITION_TYPE_BUY)
+         ClosePositions();
+      if(CountPositions() == 0)
+         OpenPosition(ORDER_TYPE_SELL);
+     }
   }
 
 //+------------------------------------------------------------------+
@@ -233,5 +245,38 @@ int CountPositions()
       count++;
      }
    return(count);
+  }
+
+//+------------------------------------------------------------------+
+//| Ambil tipe posisi terbuka milik EA (atau -1 jika tidak ada)      |
+//+------------------------------------------------------------------+
+ENUM_POSITION_TYPE GetOpenPositionType()
+  {
+   for(int i = PositionsTotal() - 1; i >= 0; i--)
+     {
+      if(PositionGetSymbol(i) != _Symbol)
+         continue;
+      if(PositionGetInteger(POSITION_MAGIC) != InpMagicNumber)
+         continue;
+      return((ENUM_POSITION_TYPE)PositionGetInteger(POSITION_TYPE));
+     }
+   return((ENUM_POSITION_TYPE)-1);
+  }
+
+//+------------------------------------------------------------------+
+//| Tutup semua posisi milik EA                                      |
+//+------------------------------------------------------------------+
+void ClosePositions()
+  {
+   for(int i = PositionsTotal() - 1; i >= 0; i--)
+     {
+      if(PositionGetSymbol(i) != _Symbol)
+         continue;
+      if(PositionGetInteger(POSITION_MAGIC) != InpMagicNumber)
+         continue;
+      ulong ticket = PositionGetInteger(POSITION_TICKET);
+      if(!trade.PositionClose(ticket))
+         Print("Gagal menutup posisi #", ticket, ", error: ", GetLastError());
+     }
   }
 //+------------------------------------------------------------------+
