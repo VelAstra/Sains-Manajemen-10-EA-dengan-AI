@@ -132,29 +132,45 @@ void OnTick()
    if(!breakoutArmed)
       return;
 
-   if(CountPositions() > 0)
-      return;
-
    if(!IsSpreadOK())
       return;
 
    double bid = SymbolInfoDouble(_Symbol, SYMBOL_BID);
    double ask = SymbolInfoDouble(_Symbol, SYMBOL_ASK);
+   double point = SymbolInfoDouble(_Symbol, SYMBOL_POINT);
 
-   if(ask > rangeHigh + SymbolInfoDouble(_Symbol, SYMBOL_POINT))
+   bool hitUp = (ask > rangeHigh + point);
+   bool hitDn = (bid < rangeLow - point);
+
+   if(!hitUp && !hitDn)
+      return;
+
+   ENUM_POSITION_TYPE existing = GetOpenPositionType();
+
+   if(hitUp)
      {
-      if(trade.Buy(InpLotSize, _Symbol, ask))
+      if(existing == POSITION_TYPE_SELL)
+         ClosePositions();
+      if(CountPositions() == 0)
         {
-         ApplySLTP();
-         Print("Range breakdown ke atas: ", rangeHigh);
+         if(trade.Buy(InpLotSize, _Symbol, ask))
+           {
+            ApplySLTP();
+            Print("Range breakdown ke atas: ", rangeHigh);
+           }
         }
      }
-   else if(bid < rangeLow - SymbolInfoDouble(_Symbol, SYMBOL_POINT))
+   else if(hitDn)
      {
-      if(trade.Sell(InpLotSize, _Symbol, bid))
+      if(existing == POSITION_TYPE_BUY)
+         ClosePositions();
+      if(CountPositions() == 0)
         {
-         ApplySLTP();
-         Print("Range breakdown ke bawah: ", rangeLow);
+         if(trade.Sell(InpLotSize, _Symbol, bid))
+           {
+            ApplySLTP();
+            Print("Range breakdown ke bawah: ", rangeLow);
+           }
         }
      }
   }
@@ -237,5 +253,38 @@ int CountPositions()
       count++;
      }
    return(count);
+  }
+
+//+------------------------------------------------------------------+
+//| Ambil tipe posisi terbuka milik EA (atau -1 jika tidak ada)      |
+//+------------------------------------------------------------------+
+ENUM_POSITION_TYPE GetOpenPositionType()
+  {
+   for(int i = PositionsTotal() - 1; i >= 0; i--)
+     {
+      if(PositionGetSymbol(i) != _Symbol)
+         continue;
+      if(PositionGetInteger(POSITION_MAGIC) != InpMagicNumber)
+         continue;
+      return((ENUM_POSITION_TYPE)PositionGetInteger(POSITION_TYPE));
+     }
+   return((ENUM_POSITION_TYPE)-1);
+  }
+
+//+------------------------------------------------------------------+
+//| Tutup semua posisi milik EA                                      |
+//+------------------------------------------------------------------+
+void ClosePositions()
+  {
+   for(int i = PositionsTotal() - 1; i >= 0; i--)
+     {
+      if(PositionGetSymbol(i) != _Symbol)
+         continue;
+      if(PositionGetInteger(POSITION_MAGIC) != InpMagicNumber)
+         continue;
+      ulong ticket = PositionGetInteger(POSITION_TICKET);
+      if(!trade.PositionClose(ticket))
+         Print("Gagal menutup posisi #", ticket, ", error: ", GetLastError());
+     }
   }
 //+------------------------------------------------------------------+
