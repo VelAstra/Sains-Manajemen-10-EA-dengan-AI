@@ -19,7 +19,7 @@ Project Sains Manajemen 261 - Membuat 10 Expert Advisor (EA) untuk MetaTrader 5 
 | No | EA | Strategi | Referensi | Status |
 |----|----|----------|-----------|--------|
 | 1 | `eas/MovingAverageCrossover.mq5` | Moving Average Crossover | [Rene Balke](https://www.youtube.com/watch?v=T78Q7K3c11s) | Done (dengan hasil backtest & optimasi) |
-| 2 | `eas/RangeBreakout.mq5` | Range / Opening Range Breakout | [Rene Balke](https://www.youtube.com/@ReneBalke) | Done (dengan hasil backtest) |
+| 2 | `eas/RangeBreakout.mq5` | Opening Range Breakout (range sesi pagi 07:00–09:00) | [Rene Balke](https://www.youtube.com/@ReneBalke) | Done (dengan hasil backtest) |
 | 3 | `eas/MacdCrossover.mq5` | MACD Crossover | [Rene Balke](https://www.youtube.com/@ReneBalke) | Done (dengan hasil backtest) |
 | 4 | `eas/RsiPullback.mq5` | RSI Pullback (oversold/overbought) | [Rene Balke](https://www.youtube.com/@ReneBalke) | Done (dengan hasil backtest) |
 | 5 | `eas/StochasticCross.mq5` | Stochastic %K/%D Crossover | [Rene Balke](https://www.youtube.com/@ReneBalke) | Done (dengan hasil backtest) |
@@ -59,7 +59,7 @@ modal virtual 10.000 USD, leverage 1:100. Parameter bawaan sesuai file EA.
 | No | EA | Total Net Profit | Profit Factor | Total Trades | Max Equity DD | Sharpe | Keterangan |
 |----|----|------------------|---------------|--------------|---------------|--------|------------|
 | 1 | MovingAverageCrossover | -56,60 USD | 0,75 | 256 | 1,00% | -1,89 | Terbaik setelah optimasi: +43,80 (PF 1,39) |
-| 2 | RangeBreakout | +19,67 USD | 1,08 | 405 | 0,40% | 0,66 | Profit tipis (breakout jam 07-09) |
+| 2 | RangeBreakout | +19,67 USD | 1,08 | 405 | 0,40% | 0,66 | Breakout range pagi (07:00–09:00); profit tipis |
 | 3 | MacdCrossover | -21,93 USD | 0,92 | 438 | 0,51% | -0,73 | Rugi kecil, perlu optimasi |
 | 4 | RsiPullback | **+79,06 USD** | **1,66** | 111 | 0,40% | **2,62** | Profit konsisten |
 | 5 | StochasticCross | -68,25 USD | 0,83 | 794 | 0,91% | -2,27 | Banyak sinyal, rugi |
