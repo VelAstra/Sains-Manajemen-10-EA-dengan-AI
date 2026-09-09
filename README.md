@@ -72,10 +72,13 @@ modal virtual 10.000 USD, leverage 1:100. Parameter bawaan sesuai file EA.
 EA yang menguntungkan dengan parameter bawaan: **RsiPullback** dan **BollingerReversion**.
 Kombinasi parameter dari setiap EA dapat dioptimasi lebih lanjut lewat *Strategy Optimization* MT5.
 
-## Referensi Channel
+## Referensi
 
-- **Rene Balke - Fx Bot Trading**: https://www.youtube.com/@ReneBalke
-- **IQCapital**: https://www.youtube.com/@IQCapital_io
+1. Balke, René. *BM Trading — Free Expert Advisors for MetaTrader 5.* https://en.bmtrading.de (diakses 8 September 2026).
+2. René Balke. *Moving Average MT5 EA Tutorial.* YouTube. https://youtu.be/T78Q7K3c11s (diakses 8 September 2026).
+3. **Rene Balke - Fx Bot Trading** (kanal). https://www.youtube.com/@ReneBalke
+4. **IQCapital** (kanal). https://www.youtube.com/@IQCapital_io
+5. MetaQuotes. *MQL5 Reference.* https://www.mql5.com/en/docs (diakses 8 September 2026).
 
 ## Panduan Optimasi
 
