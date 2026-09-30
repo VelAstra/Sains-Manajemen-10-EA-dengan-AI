@@ -90,13 +90,10 @@ Optimasi EA di MT5 Strategy Tester menggunakan menu **Strategy Tester > Settings
 
 ## Pengujian Portofolio Step-by-Step (Folder `Tes/`)
 
-Untuk keperluan evaluasi portofolio kuantitatif terpadu, folder [`Tes/`](Tes/) menyediakan modul pengujian *step-by-step*:
-- Script pengujian kuantitatif: [`Tes/run_portfolio_test.py`](Tes/run_portfolio_test.py)
-- Matriks return bulanan (Jan–Jun 2024): [`Tes/portfolio_monthly_returns.csv`](Tes/portfolio_monthly_returns.csv)
-- Data metrik lengkap: [`Tes/portfolio_test_results.json`](Tes/portfolio_test_results.json)
-- Dokumentasi teknis & audit portofolio: [`Tes/README.md`](Tes/README.md)
-- Visualisasi performa:
-  - Kurva Ekuitas & Drawdown: `Tes/portfolio_equity_curve.png`
-  - Heatmap Return Bulanan: `Tes/portfolio_monthly_heatmap.png`
-  - Perbandingan Kinerja 10 EA: `Tes/ea_performance_comparison.png`
+Untuk keperluan evaluasi portofolio kuantitatif terpadu, folder [`Tes/`](Tes/) menyajikan hasil akhir pengujian *step-by-step*:
+- Laporan & Audit Portofolio: [`Tes/README.md`](Tes/README.md)
+- Kurva Pertumbuhan Ekuitas & Drawdown: [`Tes/portfolio_equity_curve.png`](Tes/portfolio_equity_curve.png)
+- Heatmap Distribusi Return Bulanan: [`Tes/portfolio_monthly_heatmap.png`](Tes/portfolio_monthly_heatmap.png)
+- Evaluasi Kinerja Multi-Panel 10 EA: [`Tes/ea_performance_comparison.png`](Tes/ea_performance_comparison.png)
+
 

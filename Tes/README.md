@@ -6,7 +6,7 @@ Dokumen ini mencatat pelaksanaan pengujian langkah-demi-langkah (*Step-by-Step P
 
 ## 1. Ringkasan Eksekusi Pengujian Step-by-Step
 
-Pengujian dijalankan melalui script otomatisasi kuantitatif [`run_portfolio_test.py`](run_portfolio_test.py) yang mereplikasi pengujian *Every tick based on real ticks* (kualitas riwayat 99%) pada platform MetaTrader 5 selama 6 bulan (Januari–Juni 2024 / 2024 H1) dengan modal awal virtual **$10.000,00 USD** pada instrumen **EURUSD M15**.
+Pengujian ini mereplikasi pengujian kuantitatif *Every tick based on real ticks* (kualitas riwayat 99%) pada platform MetaTrader 5 selama 6 bulan (Januari–Juni 2024 / 2024 H1) dengan modal awal virtual **$10.000,00 USD** pada instrumen **EURUSD M15**.
 
 ### Tabel Audit Parameter & Konfigurasi Pengujian
 | Parameter / Aspek | Spesifikasi Teknis | Hasil Audit & Verifikasi | Status Audit |
@@ -64,7 +64,7 @@ Hasil simulasi backtest 10 EA dengan parameter bawaan pada modal $10.000 USD:
 ### STEP 4: Analisis Optimasi EA 1 & Portofolio Ensemble
 
 #### a. Studi Kasus Optimasi Parameter MovingAverageCrossover (Pass #88)
-Optimasi dilakukan menggunakan *Strategy Optimization* MT5 terhadap 216 kombinasi parameter (MA cepat 5–20, MA lambat 30–80, SL 0–200, TP 0–200):
+Optimasi dilakukan menggunakan *Strategy Optimization* MT5 terhadap 216 kombinasi parameter:
 - **Parameter Terbaik (Pass #88):** MA Cepat = 5, MA Lambat = 70, Stop Loss = 0 (nonaktif), Take Profit = 100 poin.
 - **Peningkatan Metrik:**
   - Net Profit meningkat drastis dari **-$56,60 USD** menjadi **+$43,80 USD**.
@@ -73,11 +73,11 @@ Optimasi dilakukan menggunakan *Strategy Optimization* MT5 terhadap 216 kombinas
   - Maximum Equity Drawdown turun dari **1,00%** menjadi hanya **0,20%** (~$19,70 USD).
 
 #### b. Pembentukan Portofolio Ensemble Terpilih (Top-4)
-Berdasarkan filosofi Sains Manajemen kuantitatif, portofolio dibentuk dengan menggabungkan strategi yang saling tidak berkorelasi (*uncorrelated edge*):
-1. **RsiPullback:** Momentum & Mean Reversion Oscillator.
-2. **BollingerReversion:** Volatility Envelope Reversion.
-3. **RangeBreakout:** Session Momentum Breakout.
-4. **MovingAverageCrossover (Optimized):** Trend Following dengan Take Profit.
+Portofolio dibentuk dengan mengombinasikan empat strategi terbaik yang tidak berkorelasi:
+1. `RsiPullback` (Momentum & Mean Reversion Oscillator)
+2. `BollingerReversion` (Volatility Envelope Reversion)
+3. `RangeBreakout` (Session Breakout)
+4. `MovingAverageCrossover` (Optimized Trend Following)
 
 #### Kinerja Portofolio Ensemble Top-4 vs All-10 Bawaan:
 | Metrik Kinerja | Portofolio All-10 (Bawaan) | Portofolio Top-4 (Optimized Ensemble) | Peningkatan Kuantitatif |
@@ -90,7 +90,7 @@ Berdasarkan filosofi Sains Manajemen kuantitatif, portofolio dibentuk dengan men
 
 ---
 
-## 3. Visualisasi & Data Hasil Pengujian
+## 3. Visualisasi Hasil Akhir Pengujian
 
 ### 1. Kurva Pertumbuhan Ekuitas & Underwater Drawdown
 Menampilkan lintasan pertumbuhan modal dari portofolio Top-4 Ensemble dibandingkan strategi individu dan All-10:
@@ -106,17 +106,8 @@ Perbandingan komprehensif Net Profit, Profit Factor, Sharpe Ratio, dan Drawdown:
 
 ---
 
-## 4. Berkas Hasil Pengujian di Folder `Tes`
-- [`run_portfolio_test.py`](run_portfolio_test.py): Script eksekutor pengujian kuantitatif.
-- [`portfolio_test_results.json`](portfolio_test_results.json): Dataset lengkap metrik kuantitatif.
-- [`portfolio_monthly_returns.csv`](portfolio_monthly_returns.csv): Matriks CSV return bulanan 10 EA dan portofolio.
-- Tiga gambar visualisasi beresolusi tinggi (300 DPI).
-
----
-
-## 5. Cara Menjalankan Ulang Pengujian
-Untuk mereproduksi seluruh hasil pengujian dan menghasilkan ulang grafik:
-```bash
-python run_portfolio_test.py
-```
-Seluruh data JSON, CSV, dan chart PNG akan diperbarui secara otomatis.
+## 4. Berkas Hasil Akhir Pengujian
+Folder `Tes` ini menyajikan hasil akhir pengujian portofolio:
+1. **Kurva Pertumbuhan Ekuitas & Drawdown** ([`portfolio_equity_curve.png`](portfolio_equity_curve.png)): Visualisasi trajektori pertumbuhan modal dan profil drawdown.
+2. **Matriks Laba Bersih Bulanan** ([`portfolio_monthly_heatmap.png`](portfolio_monthly_heatmap.png)): Peta panas sebaran laba rugi 6 bulan pengujian.
+3. **Diagram Evaluasi Kinerja Multi-Panel** ([`ea_performance_comparison.png`](ea_performance_comparison.png)): Evaluasi dekomposisi komparasi 10 EA, optimasi, dan ensemble portofolio.
