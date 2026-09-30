@@ -87,3 +87,16 @@ Optimasi EA di MT5 Strategy Tester menggunakan menu **Strategy Tester > Settings
 - Parameter yang dioptimasi (contoh): periode MA cepat, periode MA lambat, metode MA, SL/TP
 - Kriteria optimasi: Profit factor, Expected Payoff, atau Balance Drawdown
 - Hindari overfitting dengan uji forward (out-of-sample) setelah optimasi
+
+## Pengujian Portofolio Step-by-Step (Folder `Tes/`)
+
+Untuk keperluan evaluasi portofolio kuantitatif terpadu, folder [`Tes/`](Tes/) menyediakan modul pengujian *step-by-step*:
+- Script pengujian kuantitatif: [`Tes/run_portfolio_test.py`](Tes/run_portfolio_test.py)
+- Matriks return bulanan (Jan–Jun 2024): [`Tes/portfolio_monthly_returns.csv`](Tes/portfolio_monthly_returns.csv)
+- Data metrik lengkap: [`Tes/portfolio_test_results.json`](Tes/portfolio_test_results.json)
+- Dokumentasi teknis & audit portofolio: [`Tes/README.md`](Tes/README.md)
+- Visualisasi performa:
+  - Kurva Ekuitas & Drawdown: `Tes/portfolio_equity_curve.png`
+  - Heatmap Return Bulanan: `Tes/portfolio_monthly_heatmap.png`
+  - Perbandingan Kinerja 10 EA: `Tes/ea_performance_comparison.png`
+
